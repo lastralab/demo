@@ -3,7 +3,7 @@
  * Created by PhpStorm
  * Project: L'Astra Lab
  * User: tan
- * Date: 5/15/2019
+ * Date: 5/15/21
  * @codingStandardsIgnoreFile
  */
 
@@ -32,7 +32,7 @@ class Debugger implements ArgumentInterface
     }
 
     /**
-     * Add your debugging code here
+     * Add your logic here and visit <local_url>/in_a_galaxy/far/faraway
      * @return array
      */
     public function startDebugging(): array
