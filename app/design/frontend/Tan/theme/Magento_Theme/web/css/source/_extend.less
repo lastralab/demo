@@ -1,0 +1,87 @@
+//
+//  Common
+//  _____________________________________________
+@import "_theme.less";
+
+& when (@media-common = true) {
+
+    //
+    //  Header
+    //  ---------------------------------------------
+
+    .page-header {
+        border: 0;
+        margin-bottom: 0;
+        position: fixed;
+        display: flex;
+        background-color: #fff;
+        flex-direction: column;
+        width: 100%;
+        z-index: 9999;
+    }
+
+    .page-header {
+        .header.content {
+            display: flex !important;
+            justify-content: space-between;
+            width: 100% !important;
+        }
+        .nav-sections {
+            margin-bottom: 0;
+        }
+    }
+
+    .custom.link.wishlist {
+        float: right;
+    }
+    .custom.link.wishlist .counter.qty {
+        height: 24px;
+        line-height: 24px;
+        border-radius: 2px;
+        display: inline-block;
+        margin: 3px 0 0;
+        min-width: 18px;
+        overflow: hidden;
+        padding: 0 3px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .wishlist-custom:before {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 4rem;
+        line-height: 0.9;
+        color: #8f8f8f;
+        content: '\e600';
+        font-family: 'icons-blank-theme';
+        margin: 0;
+        vertical-align: top;
+        display: flex;
+        overflow: hidden;
+        speak: none;
+        text-align: center;
+        font-weight: 400;
+    }
+
+    .wishlist-custom:hover:before {
+        color: #333333;
+    }
+
+    .wishlist-custom .text{
+        border: 0;
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    // Main content
+
+    .page-main {
+        margin-top: 220px !important;
+    }
+}

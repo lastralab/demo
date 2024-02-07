@@ -1,0 +1,27 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_file" xsi:type="string">images/logo.png</argument>
+                <argument name="logo_width" xsi:type="number">100</argument>
+                <argument name="logo_height" xsi:type="number">30</argument>
+                <argument name="logo_alt" xsi:type="string">vbr</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceContainer name="header-wrapper">
+            <block class="Magento\Wishlist\Block\Link" name="wish-list-link-custom" before="minicart" template="Tan_InitTheme::wishlist.phtml" />
+        </referenceContainer>
+
+        <move element="navigation.sections" destination="header.container" after="-"/>
+        <move element="breadcrumbs" destination="main.content" before="-"/>
+        <move element="top.search" destination="header-wrapper" after="logo"/>
+
+        <referenceBlock name="advanced-search-link" remove="true"/>
+        <referenceBlock name="wish-list-link" remove="true" />
+        <referenceBlock name="register-link" remove="true" />
+        <referenceBlock name="currency" remove="true"/>
+
+    </body>
+</page>
