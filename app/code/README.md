@@ -21,6 +21,7 @@ __Tan_InitCatalog__
 __Tan_Catalog__
 * Creates Category Filter Service
     * getCategoryIdByName()
-    * Using Lastra_Testing:
-        * ![image](https://github.com/lastralab/demo/assets/22894897/4d809c86-e841-4bad-a04e-60d1e003a03f)
+    * Using xdebug + Lastra_Testing:
+        * ![image](https://github.com/lastralab/demo/assets/22894897/016f9f6d-a699-4701-975c-84cfc9a1e229)
+
 
