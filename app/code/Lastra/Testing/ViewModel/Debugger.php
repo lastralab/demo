@@ -3,7 +3,7 @@
  * Created by PhpStorm
  * Project: L'Astra Lab
  * User: tan
- * Date: 5/15/2019
+ * Date: 5/15/21
  * @codingStandardsIgnoreFile
  */
 
@@ -33,6 +33,8 @@ class Debugger implements ArgumentInterface
 
     /**
      * Add your debugging code here
+     * Turn on xdebug help extension in your browser
+     * Go to URL '<your_local_environment_url>/in_a_galaxy/far/faraway'
      * @return array
      */
     public function startDebugging(): array
