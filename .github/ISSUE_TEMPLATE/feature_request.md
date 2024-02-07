@@ -1,9 +1,9 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+title: '[TAN-<issue#>]'
+labels: 'enhancement'
+assignees: 'lastralab'
 
 ---
 
