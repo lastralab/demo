@@ -1,0 +1,26 @@
+<?php
+/**
+ * Created by PhpStorm
+ * Project: LastraLab
+ * User: taniamolina
+ * Date: 5/15/21
+ * @codingStandardsIgnoreFile
+ */
+
+$viewModel = $block->getData('view_model');
+$results = $viewModel->startDebugging();
+?>
+<h3><?= __("Debugging Results") ?></h3>
+<div style="display: flex; flex-direction: column; width: 100%">
+    <?php foreach ($results as $key => $value) : ?>
+        <div style="display: flex; flex-direction: row; justify-content: space-between; width: 800px; border-bottom: 1px solid #9E9E9E;">
+            <span style="width: 35%; line-height: 2">
+                <b><?= $key ?></b>
+            </span>
+            <span style="width: 65%; line-height: 2">
+                <?= $value ?>
+            </span>
+        </div>
+    <?php endforeach; ?>
+</div>
+
