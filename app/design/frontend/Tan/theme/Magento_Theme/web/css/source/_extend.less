@@ -1,14 +1,11 @@
-//
-//  Common
-//  _____________________________________________
-@import "_theme.less";
 
-& when (@media-common = true) {
+@import "_colors.less";
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
 
     //
     //  Header
     //  ---------------------------------------------
-
     .page-header {
         border: 0;
         margin-bottom: 0;
@@ -25,9 +22,6 @@
             display: flex !important;
             justify-content: space-between;
             width: 100% !important;
-        }
-        .nav-sections {
-            margin-bottom: 0;
         }
     }
 
@@ -47,11 +41,15 @@
         white-space: normal;
     }
 
+    .wishlist-custom {
+        display: flex;
+    }
+
     .wishlist-custom:before {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         font-size: 4rem;
-        line-height: 0.9;
+        line-height: 0.8;
         color: #8f8f8f;
         content: '\e600';
         font-family: 'icons-blank-theme';
@@ -79,9 +77,83 @@
         width: 1px;
     }
 
-    // Main content
+    .nav-sections {
+        margin-bottom: 0;
+        top: 120px;
+        background: #f5f5f5;
+        position: fixed;
+        display: flex;
+        width: 100%;
+        z-index: 99;
+        .section-items {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            li.category-item {
+                margin: auto 4rem;
+            }
+        }
+    }
 
+    //
+    // Main content
+    //
     .page-main {
         margin-top: 220px !important;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .custom.link.wishlist {
+        float: left;
+        margin-top: 1rem;
+    }
+    .custom.link.wishlist .counter.qty {
+        height: 24px;
+        line-height: 24px;
+        border-radius: 2px;
+        display: inline-block;
+        margin: 3px 0 0;
+        min-width: 18px;
+        overflow: hidden;
+        padding: 0 3px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .wishlist-custom {
+        display: flex;
+    }
+
+    .wishlist-custom:before {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 4rem;
+        line-height: 0.8;
+        color: #8f8f8f;
+        content: '\e600';
+        font-family: 'icons-blank-theme';
+        margin: 0;
+        vertical-align: top;
+        display: flex;
+        overflow: hidden;
+        speak: none;
+        text-align: center;
+        font-weight: 400;
+    }
+
+    .wishlist-custom:hover:before {
+        color: #333333;
+    }
+
+    .wishlist-custom .text{
+        border: 0;
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
     }
 }

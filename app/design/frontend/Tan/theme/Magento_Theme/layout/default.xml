@@ -14,7 +14,6 @@
             <block class="Magento\Wishlist\Block\Link" name="wish-list-link-custom" before="minicart" template="Tan_InitTheme::wishlist.phtml" />
         </referenceContainer>
 
-        <move element="navigation.sections" destination="header.container" after="-"/>
         <move element="breadcrumbs" destination="main.content" before="-"/>
         <move element="top.search" destination="header-wrapper" after="logo"/>
 
