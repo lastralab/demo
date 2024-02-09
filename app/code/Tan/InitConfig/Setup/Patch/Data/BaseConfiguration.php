@@ -33,6 +33,7 @@ class BaseConfiguration implements DataPatchInterface, PatchRevertableInterface
         'dev/static/sign' => 0,
         'design/head/default_title' => 0,
         'design/header/welcome' => 'This is a fake website!',
+        'general/store_information/name' => 'La Cucharita',
         'design/footer/copyright' => 'Copyright © 2024-present Tanismo. All rights reserved.'
     ];
 

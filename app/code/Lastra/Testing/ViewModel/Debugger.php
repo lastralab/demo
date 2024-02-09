@@ -3,7 +3,7 @@
  * Created by PhpStorm
  * Project: L'Astra Lab
  * User: tan
- * Date: 5/15/21
+ * Date: 5/15/2019
  * @codingStandardsIgnoreFile
  */
 
@@ -32,17 +32,17 @@ class Debugger implements ArgumentInterface
     }
 
     /**
-     * Add your logic here and visit <local_url>/in_a_galaxy/far/faraway
+     * Add your debugging code here
      * @return array
      */
     public function startDebugging(): array
     {
         $html = [];
         try {
-            $id = $this->test->getCategoryIdByName('Mexican') ?: 'not found';
+            $id = $this->test->getCategoryIdByName('Satan\'s favorites') ?: 'not found';
             $html = array_merge($html, [
                 'Testing class' => Test::class,
-                'Result' => "getCategoryIdByName('Mexican'): " . $id]);
+                'Result' => "getCategoryIdByName('Satan's favorites'): " . $id]);
         } catch (\Exception $e) {
             $html = ['Error' => $e->getMessage()];
         }
