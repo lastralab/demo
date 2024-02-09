@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm
- * Project: L'Astra Lab
+ * Project: LastraLab
  * User: taniamolina
  * Date: 5/15/21
  * @codingStandardsIgnoreFile

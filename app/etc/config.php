@@ -331,6 +331,7 @@ return [
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,
         'Tan_Catalog' => 1,
+        'Tan_Checkout' => 1,
         'Tan_InitCatalog' => 1,
         'Tan_InitConfig' => 1,
         'Tan_InitTheme' => 1,
