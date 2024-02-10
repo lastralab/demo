@@ -1,0 +1,17 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+
+/** @var \Tan\Theme\ViewModel\General $viewModel */
+$viewModel = $block->getData('view_model');
+?>
+<div class="store-name">
+    <a href="<?= $block->getBaseUrl() . $viewModel->getContactUsLink() ?>"
+       target="_blank" class="store-link" title="Contact Us">
+        <span>
+            <i class="fa-solid fa-spoon"></i>
+            <b>
+                <?= __($viewModel->getStoreName())?>
+            </b>
+        </span>
+    </a>
+</div>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="top.links">
+            <block class="Tan\Customer\Block\AccountLink" name="my-account-icon-link" before="-">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">My Account</argument>
+                    <argument name="path" xsi:type="string" translate="true">customer/account</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Customer\Block\Account\AuthorizationLink"
+                   name="authorization-link-login"
+                   template="Tan_Customer::account/link/authorization.phtml">
+                <arguments>
+                    <argument name="sortOrder" xsi:type="number">10</argument>
+                </arguments>
+            </block>
+            <block class="Tan\Customer\Block\OrdersLink" name="orders-link" before="welcome">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">My Orders</argument>
+                    <argument name="path" xsi:type="string" translate="true">sales/order/history</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <move element="orders-link" destination="header-wrapper" after="wish-list-link-custom"/>
+
+        <referenceBlock name="authorization-link" remove="true" />
+        <referenceBlock name="my-account-link" remove="true" />
+    </body>
+</page>

@@ -6,6 +6,8 @@
  * Date: 02/02/2024
  */
 
+declare(strict_types=1);
+
 namespace Tan\InitCatalog\Setup\Patch\Data;
 
 use Magento\Framework\Exception\NoSuchEntityException;

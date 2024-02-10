@@ -1,15 +1,18 @@
 
-#minicart-content-wrapper {
-    .actions {
-        .empty-cart-button {
-            text-align: center;
-        }
-        #empty-minicart {
-            &:hover {
-                color: red;
-                cursor: pointer;
-                font-weight: 400;
-                text-decoration: none;
+& when (@media-common = true) {
+    #minicart-content-wrapper {
+        .actions {
+            .empty-cart-button {
+                text-align: center;
+            }
+
+            #empty-minicart {
+                &:hover {
+                    color: red;
+                    cursor: pointer;
+                    font-weight: 400;
+                    text-decoration: none;
+                }
             }
         }
     }

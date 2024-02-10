@@ -6,6 +6,8 @@
  * Date: 02/05/2024
  */
 
+declare(strict_types=1);
+
 namespace Tan\InitCatalog\Model\Attribute\Source;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;

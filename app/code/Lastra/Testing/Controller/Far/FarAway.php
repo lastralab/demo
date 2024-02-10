@@ -7,6 +7,8 @@
  * @codingStandardsIgnoreFile
  */
 
+declare(strict_types=1);
+
 namespace Lastra\Testing\Controller\Far;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
