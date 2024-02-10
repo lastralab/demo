@@ -6,8 +6,9 @@ Check <a href="https://github.com/lastralab/demo/blob/main/app/code/README.md">a
 
 Desktop:
 
-![image](https://github.com/lastralab/demo/assets/22894897/324b13da-495b-4896-ac62-b2f32328db99)
-![image](https://github.com/lastralab/demo/assets/22894897/1e15aac5-cd72-4590-ba35-aac3d79d8d4d)
+![image](https://github.com/lastralab/demo/assets/22894897/b17ab4f9-35c6-4084-9d43-6a97045a34c5)
+![image](https://github.com/lastralab/demo/assets/22894897/e272ffeb-ef90-492b-89c8-e841fa4a640d)
+
 
 Mobile
 
