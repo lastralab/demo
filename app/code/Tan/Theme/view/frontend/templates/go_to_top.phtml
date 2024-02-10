@@ -3,24 +3,24 @@
         <i class="fa-solid fa-arrow-up"></i>
     </span>
     <span class="gt-text">
-        <?= __('Top') ?>
+        <?= __(' Top') ?>
     </span>
 </a>
 
 <script type="text/javascript">
     require(['jquery', 'domReady!'], function($) {
-        let $bt = $('#gototop');
+        let $button = $('#gototop');
         function GoToTop() {
-            if($(this).scrollTop() > 300) {
-                $bt.fadeIn();
+            if ($(this).scrollTop() > 300) {
+                $button.fadeIn();
             } else {
-                $bt.fadeOut();
+                $button.fadeOut();
             }
         }
-        GoToTop();
+        new GoToTop();
         $(window).scroll(GoToTop);
-        $bt.on('click touch',function() {
-            $('body,html').animate({scrollTop:0},500);
+        $button.on('click touch', function() {
+            $('body,html').animate({scrollTop:0}, 500);
             return false;
         })
     });

@@ -12,7 +12,7 @@ if ($block->isLoggedIn()) {
 ?>
 <li class="link authorization-link" data-label="<?= $escaper->escapeHtml(__('or')) ?>">
     <a <?= /* @noEscape */ $block->getLinkAttributes() ?>
-        <?= /* @noEscape */ $dataPostParam ?> title="<?= $session ? 'Sign out' : 'Sign in'?>">
+        <?= /* @noEscape */ $dataPostParam ?> title="<?= $session ? 'Logout' : 'Login/Create Account'?>">
         <?= !$session
             ? __("Login ") . ' <i class="fa-solid fa-right-to-bracket"></i>'
             : __("Logout ") .' <i class="fa-solid fa-right-from-bracket"></i>'?>
