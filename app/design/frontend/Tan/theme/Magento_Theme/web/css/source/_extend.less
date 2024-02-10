@@ -24,14 +24,20 @@
             justify-content: space-between;
             width: 100% !important;
             .logo {
-                max-width: 190px;
+                max-width: 110px;
+                min-width: 100px;
             }
             .store-name {
                 overflow: hidden;
                 padding: 5px;
+                width: 170px;
+                margin-left: 1rem;
                 .store-link:hover {
                     text-decoration: none;
                 }
+            }
+            .block-search {
+                width: 100% !important;
             }
         }
     }
@@ -44,8 +50,8 @@
         line-height: 24px;
         border-radius: 2px;
         display: inline-block;
-        margin: 3px 0 0;
-        min-width: 18px;
+        margin: 5px 0 0;
+        max-width: 15px;
         overflow: hidden;
         padding: 0 3px;
         text-align: center;
@@ -67,7 +73,7 @@
         color: #8f8f8f;
         content: '\e600';
         font-family: 'icons-blank-theme';
-        margin: 0;
+        margin: 0 -8px 0 0;
         vertical-align: top;
         display: flex;
         overflow: hidden;
@@ -99,7 +105,7 @@
 
     .nav-sections {
         margin-bottom: 0;
-        top: 140px;
+        top: 120px;
         background: #f5f5f5;
         position: fixed;
         display: flex;
@@ -170,6 +176,9 @@
     }
 
     .header.content {
+        .block-search {
+            width: auto !important;
+        }
         .my-orders-top-link {
             float: left;
             margin: 7px 14px !important;
