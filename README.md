@@ -11,6 +11,7 @@ Desktop:
 
 Mobile
 
-![image](https://github.com/lastralab/demo/assets/22894897/16cfcd01-d987-4f94-81d9-f5a0462c5447)
-![image](https://github.com/lastralab/demo/assets/22894897/81d419f0-7b9e-405e-be4a-14379e240644)
+![image](https://github.com/lastralab/demo/assets/22894897/88607695-5145-446c-a898-87143e92312e)
+![image](https://github.com/lastralab/demo/assets/22894897/09480860-a9ad-42a9-b119-c9ef2cf50a33)
+
 
