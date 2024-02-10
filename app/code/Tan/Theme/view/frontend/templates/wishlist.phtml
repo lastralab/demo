@@ -2,10 +2,10 @@
 $authorizationLink = $block->getLayout()->createBlock('Magento\Customer\Block\Account\AuthorizationLink');
 if ($authorizationLink->isLoggedIn()) : ?>
 <div class="custom link wishlist" data-bind="scope: 'wishlist'">
-    <a <?= /* @noEscape */ $block->getLinkAttributes() ?> class="wishlist-custom">
+    <a <?= /* @noEscape */ $block->getLinkAttributes() ?> class="wishlist-custom" title="My Wish List">
         <span class="text"><?= $block->escapeHtml($block->getLabel()) ?></span>
         <!-- ko if: wishlist().counter -->
-        <span data-bind="text: wishlist().counter" class="counter qty"></span>
+        <span data-bind="text: 'x' + wishlist().counter" class="counter qty"></span>
         <!-- /ko -->
     </a>
 </div>
