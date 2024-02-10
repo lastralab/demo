@@ -92,7 +92,7 @@
     }
 
     .block-minicart {
-        top: 40px;
+        top: 40px !important;
         overflow: auto;
         max-height: 700px;
     }
@@ -147,6 +147,28 @@
             .store-name {
                 display: none;
             }
+        }
+    }
+
+    .header.links {
+        .authorization-link {
+            margin-top: 3px;
+            a:hover {
+                text-decoration: none;
+            }
+        }
+        .my-account-top-link {
+            margin-left: 2rem !important;
+            border: none !important;
+            padding: 0 !important;
+            content: 'My Account';
+        }
+    }
+
+    .header.content {
+        .my-orders-top-link {
+        float: left;
+        margin: 7px 14px !important;
         }
     }
 
