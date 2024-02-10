@@ -6,13 +6,11 @@ Check <a href="https://github.com/lastralab/demo/blob/main/app/code/README.md">a
 
 Desktop:
 
-![image](https://github.com/lastralab/demo/assets/22894897/f8ea96ce-813e-4d6e-bb20-2dccd0d75842)
-
-![image](https://github.com/lastralab/demo/assets/22894897/47cdc0fe-5319-4e91-98cc-6ba81332b4f7)
+![image](https://github.com/lastralab/demo/assets/22894897/324b13da-495b-4896-ac62-b2f32328db99)
+![image](https://github.com/lastralab/demo/assets/22894897/1e15aac5-cd72-4590-ba35-aac3d79d8d4d)
 
 Mobile
 
 ![image](https://github.com/lastralab/demo/assets/22894897/16cfcd01-d987-4f94-81d9-f5a0462c5447)
-
 ![image](https://github.com/lastralab/demo/assets/22894897/81d419f0-7b9e-405e-be4a-14379e240644)
 
