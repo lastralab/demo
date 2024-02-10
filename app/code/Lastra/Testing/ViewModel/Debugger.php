@@ -7,6 +7,8 @@
  * @codingStandardsIgnoreFile
  */
 
+declare(strict_types=1);
+
 namespace Lastra\Testing\ViewModel;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;

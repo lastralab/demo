@@ -6,6 +6,7 @@
  * Date: 02/02/2024
  */
 
+
 use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(

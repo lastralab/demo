@@ -6,6 +6,8 @@
  * Date: 02/06/2024
  */
 
+declare(strict_types=1);
+
 namespace Tan\Catalog\Model\Category;
 
 use \Magento\Catalog\Api\CategoryListInterface;

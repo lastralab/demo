@@ -1,0 +1,20 @@
+<?php
+/**
+* @var \Magento\Customer\Block\Account\AuthorizationLink $block
+* @var \Magento\Framework\Escaper $escaper
+*/
+$dataPostParam = '';
+$session = false;
+if ($block->isLoggedIn()) {
+    $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
+    $session = true;
+}
+?>
+<li class="link authorization-link" data-label="<?= $escaper->escapeHtml(__('or')) ?>">
+    <a <?= /* @noEscape */ $block->getLinkAttributes() ?>
+        <?= /* @noEscape */ $dataPostParam ?> title="<?= $session ? 'Sign out' : 'Sign in'?>">
+        <?= !$session
+            ? __("Login ") . ' <i class="fa-solid fa-right-to-bracket"></i>'
+            : __("Logout ") .' <i class="fa-solid fa-right-from-bracket"></i>'?>
+    </a>
+</li>
