@@ -17,7 +17,7 @@
             </block>
             <block class="Tan\Customer\Block\OrdersLink" name="orders-link" before="welcome">
                 <arguments>
-                    <argument name="label" xsi:type="string" translate="true">My Orders</argument>
+                    <argument name="label" xsi:type="string" translate="true">Orders</argument>
                     <argument name="path" xsi:type="string" translate="true">sales/order/history</argument>
                 </arguments>
             </block>

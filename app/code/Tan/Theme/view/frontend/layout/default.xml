@@ -1,20 +1,6 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>
-        <css src="Tan_Theme::css/fontawesome/fontawesome.css"/>
-        <css src="Tan_Theme::css/fontawesome/regular.css"/>
-        <css src="Tan_Theme::css/fontawesome/solid.css"/>
-    </head>
     <body>
-        <referenceBlock name="logo">
-            <arguments>
-                <argument name="logo_file" xsi:type="string">images/logo.png</argument>
-                <argument name="logo_width" xsi:type="number">100</argument>
-                <argument name="logo_height" xsi:type="number">30</argument>
-                <argument name="logo_alt" xsi:type="string">vbr</argument>
-            </arguments>
-        </referenceBlock>
-
         <referenceContainer name="header-wrapper">
             <block class="Magento\Framework\View\Element\Template" name="store_name"  template="Tan_Theme::store_name.phtml" after="logo"/>
             <block class="Magento\Wishlist\Block\Link" name="wish-list-link-custom" before="minicart" template="Tan_Theme::wishlist.phtml" />
