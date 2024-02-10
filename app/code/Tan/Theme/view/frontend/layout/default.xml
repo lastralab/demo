@@ -20,6 +20,10 @@
             <block class="Magento\Wishlist\Block\Link" name="wish-list-link-custom" before="minicart" template="Tan_Theme::wishlist.phtml" />
         </referenceContainer>
 
+        <referenceContainer name="page.bottom.container">
+            <block name="go.to.top" template="Tan_Theme::go_to_top.phtml" />
+        </referenceContainer>
+
         <referenceBlock name="store_name">
             <arguments>
                 <argument name="view_model"

@@ -1,0 +1,27 @@
+<a rel="nofollow" onclick="javascript:void(0);" id="gototop">
+    <span class="gt-arrow">
+        <i class="fa-solid fa-arrow-up"></i>
+    </span>
+    <span class="gt-text">
+        <?= __('Top') ?>
+    </span>
+</a>
+
+<script type="text/javascript">
+    require(['jquery', 'domReady!'], function($) {
+        let $bt = $('#gototop');
+        function GoToTop() {
+            if($(this).scrollTop() > 300) {
+                $bt.fadeIn();
+            } else {
+                $bt.fadeOut();
+            }
+        }
+        GoToTop();
+        $(window).scroll(GoToTop);
+        $bt.on('click touch',function() {
+            $('body,html').animate({scrollTop:0},500);
+            return false;
+        })
+    });
+</script>
