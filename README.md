@@ -12,7 +12,7 @@ Desktop:
 
 Mobile
 
-<img src="https://github.com/lastralab/demo/assets/22894897/88607695-5145-446c-a898-87143e92312e" style="max-width:300px !important;"/> 
-<img src="https://github.com/lastralab/demo/assets/22894897/09480860-a9ad-42a9-b119-c9ef2cf50a33" style="max-width:300px !important;"/>
+<img src="https://github.com/lastralab/demo/assets/22894897/88607695-5145-446c-a898-87143e92312e" style="width:40%;"/> 
+<img src="https://github.com/lastralab/demo/assets/22894897/09480860-a9ad-42a9-b119-c9ef2cf50a33" style="width:40%;"/>
 
 
