@@ -10,13 +10,8 @@ declare(strict_types=1);
 
 namespace Tan\Catalog\Model\Category;
 
-use \Magento\Catalog\Api\CategoryListInterface;
-use Magento\Catalog\Api\Data\CategoryInterface;
-use \Magento\Framework\Api\SearchCriteriaInterface;
-use \Magento\Framework\Api\Search\FilterGroup;
-use \Magento\Framework\Api\FilterBuilder;
-use \Magento\Framework\Api\Search\SearchCriteriaBuilder;
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
+use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface as Logger;
 
 class CategoryFilterService
@@ -26,57 +21,51 @@ class CategoryFilterService
      */
     protected Logger $logger;
 
-    protected $categoryList;
     /**
-     * @var SearchCriteriaBuilder
+     * @var StoreManagerInterface
      */
-    protected $searchCriteriaBuilder;
+    private StoreManagerInterface $storeManager;
 
     /**
-     * @var FilterBuilder
+     * @var CollectionFactory
      */
-    protected $filterBuilder;
+    private CollectionFactory $collectionFactory;
 
     /**
-     * @param CategoryListInterface $categoryList
-     * @param SearchCriteriaBuilder $searchCriteriaBuilder
-     * @param FilterBuilder $filterBuilder
+     * @param StoreManagerInterface $storeManager
+     * @param CollectionFactory $collectionFactory
      * @param Logger $logger
      */
     public function __construct(
-        CategoryListInterface $categoryList,
-        SearchCriteriaBuilder $searchCriteriaBuilder,
-        FilterBuilder $filterBuilder,
+        StoreManagerInterface $storeManager,
+        CollectionFactory $collectionFactory,
         Logger $logger
     ) {
-        $this->categoryList = $categoryList;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
-        $this->filterBuilder = $filterBuilder;
         $this->logger = $logger;
+        $this->storeManager = $storeManager;
+        $this->collectionFactory = $collectionFactory;
     }
 
     /**
      * @param string $categoryName
-     * @return int|false
+     * @return int
      */
-    public function getCategoryIdByName(string $categoryName): int|false
+    public function getCategoryIdByName(string $categoryName): int
     {
-        $filter = $this->filterBuilder
-            ->setField(CategoryInterface::KEY_NAME)
-            ->setConditionType('like')
-            ->setValue($categoryName)
-            ->create();
-
-        $searchCriteria = $this->searchCriteriaBuilder
-            ->addFilter($filter)
-            ->create();
-
-        $items = $this->categoryList->getList($searchCriteria)->getItems();
-        $categoryId = !empty($items) ? $items[0]->getId() : false;
-
-        if (count($items) == 0 || $categoryId === null) {
-            return false;
+        try {
+            $items = $this->collectionFactory->create()
+                ->addAttributeToSelect('*')
+                ->setStore($this->storeManager->getStore()->getId());
+            foreach ($items as $item) {
+                if ($item->getName() == $categoryName) {
+//                    $this->logger->debug(
+//                        '[Tan_Catalog] Category Filtered['. $item->getId().']: ' . $item->getName());
+                    return intval($item->getId());
+                }
+            }
+        } catch (\Exception $e) {
+            $this->logger->error('[Tan_Catalog] Category Filter Service error: ' . $e->getMessage());
         }
-        return $categoryId;
+        return 0;
     }
 }
