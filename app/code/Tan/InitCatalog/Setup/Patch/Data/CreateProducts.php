@@ -96,7 +96,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             'type' => 'variation',
             'sku' => self::DEMO_IMAGES_SKU,
             'options' => [],
-            'description' => 'Ideally for chilaquiles, enchiladas and/or eat with chips',
+            'description' => 'Ideal for chilaquiles, enchiladas and/or eat with chips',
             'categories' => ['Mexican', "Satan's favorites"],
             'pungency' => ['mild', 'satan-s-kiss', 'spicy'],
             'jar' => ['one-liter', 'half-liter', 'baby'],
@@ -124,7 +124,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
         'Sesame Sauce' => [
             'type' => 'simple',
             'sku' => 'sesame-sauce',
-            'description' => 'Ideally for sashimi',
+            'description' => 'Ideal for sashimi',
             'categories' => ['Other', 'For fish'],
             'pungency' => 'satan-s-kiss',
             'jar' => 'baby',
@@ -136,7 +136,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
         'Carrot Ginger Dressing' => [
             'type' => 'simple',
             'sku' => 'carrot-dressing',
-            'description' => 'Ideally for lettuce salad',
+            'description' => 'Ideal for lettuce salad',
             'categories' => ['Other', 'Sweet Hot'],
             'pungency' => 'mild',
             'jar' => 'baby',
@@ -466,9 +466,10 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
      */
     private function setImages(Product $product, string $fileName): Product
     {
-        $imageUrl = $this->storeManager->getStore()->getBaseUrl()
-            . 'static/frontend/Tan/theme/en_US/images/' . $fileName . '.jpg';
+        $imageUrl = '';
         try {
+            $imageUrl = $this->storeManager->getStore()->getBaseUrl()
+                . 'static/frontend/Tan/theme/en_US/images/' . $fileName . '.jpg';
             $tmpDir = $this->directoryList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'tmp';
             $this->assetRepository->checkAndCreateFolder($tmpDir);
             $newImageFile = $tmpDir . basename($imageUrl);
@@ -496,7 +497,6 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
         foreach (self::PRODUCTS as $name => $entity) {
             $sku = $entity['sku'];
             if ($entity['type'] == 'variation') {
-                $sku = '';
                 foreach ($entity['jar'] as $jar) {
                     foreach ($entity['pungency'] as $pungency) {
                         $sku = $entity['sku'] . '-' . $jar . '-' . $pungency;
