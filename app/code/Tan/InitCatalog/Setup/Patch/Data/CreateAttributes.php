@@ -106,8 +106,7 @@ class CreateAttributes implements DataPatchInterface, PatchRevertableInterface
                 foreach ($attributes as $code) {
                     if (!$this->setup->getIdByCode(Category::ENTITY, $code)) {
                         $this->createAttribute($type, $code);
-                        $this->logger
-                            ->debug('[Tan_InitCatalog] Created Attribute: ' . $code);
+//                        $this->logger->debug('[Tan_InitCatalog] Created Attribute: ' . $code);
                     }
                 }
             }
@@ -182,8 +181,7 @@ class CreateAttributes implements DataPatchInterface, PatchRevertableInterface
                         $this->setup->delete(
                             $this->setupFactory->create()->getAttribute(Category::ENTITY, $entityId)
                         );
-                        $this->logger
-                            ->debug('[Tan_InitCatalog] Deleted Attribute: ' . $code);
+//                        $this->logger->debug('[Tan_InitCatalog] Deleted Attribute: ' . $code);
                     }
                 }
             }
