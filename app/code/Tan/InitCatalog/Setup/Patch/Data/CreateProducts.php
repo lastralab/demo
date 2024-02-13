@@ -25,9 +25,11 @@ use Psr\Log\LoggerInterface as Logger;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Api\CategoryLinkManagementInterface;
 use Tan\Catalog\Model\Category\CategoryFilterService;
-use Magento\Framework\View\Asset\Repository as AssetRepository;
-use Magento\Catalog\Api\Data\ProductExtensionInterface;
+use Magento\Framework\Filesystem\Io\File as AssetRepository;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Catalog\Model\ResourceModel\Product as Resource;
 use Magento\Framework\App\State;
+use Magento\Catalog\Api\Data\ProductExtensionInterface;
 
 #[\AllowDynamicProperties]
 class CreateProducts implements DataPatchInterface, PatchRevertableInterface
@@ -89,13 +91,13 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
      */
     private LinkInterface $linkInterface;
 
-    private const PRODUCTS = [
+    public const PRODUCTS = [
         'Salsa Verde' => [
-            'type' => 'configurable',
+            'type' => 'variation',
             'sku' => self::DEMO_IMAGES_SKU,
             'options' => [],
             'description' => 'Ideally for chilaquiles, enchiladas and/or eat with chips',
-            'categories' => ['Mexican', 'Satan\'s favorites'],
+            'categories' => ['Mexican', "Satan's favorites"],
             'pungency' => ['mild', 'satan-s-kiss', 'spicy'],
             'jar' => ['one-liter', 'half-liter', 'baby'],
             'vegan' => 1,
@@ -106,7 +108,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             'visibility' => Product\Visibility::VISIBILITY_BOTH
         ],
         'Salsa Chipotle' => [
-            'type' => 'configurable',
+            'type' => 'variation',
             'sku' => 'salsa-chipotle',
             'options' => [],
             'description' => 'Ideally for tuna flautas',
@@ -117,8 +119,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             'signature' => 1,
             'increments' => 10.00,
             'price' => 10.00,
-            'weight' => 1.50,
-            'visibility' => Product\Visibility::VISIBILITY_BOTH
+            'weight' => 1.50
         ],
         'Sesame Sauce' => [
             'type' => 'simple',
@@ -130,8 +131,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             'vegan' => 1,
             'signature' => 1,
             'price' => 15.00,
-            'weight' => 1.50,
-            'visibility' => Product\Visibility::VISIBILITY_BOTH
+            'weight' => 1.50
         ],
         'Carrot Ginger Dressing' => [
             'type' => 'simple',
@@ -143,8 +143,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             'vegan' => 1,
             'signature' => 1,
             'price' => 15.00,
-            'weight' => 1.50,
-            'visibility' => Product\Visibility::VISIBILITY_BOTH
+            'weight' => 1.50
         ],
         'Sampler Pack' => [
             'type' => 'bundle',
@@ -163,20 +162,26 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             'vegan' => 0,
             'signature' => 1,
             'price' => 40.00,
-            'weight' => 1.50,
-            'visibility' => Product\Visibility::VISIBILITY_BOTH
+            'weight' => 1.50
         ],
         'Recipes' => [
             'type' => 'virtual',
             'sku' => 'recipes',
             'description' => 'Videos of all the recipes (English language)',
             'categories' => ['Specials'],
-            'price' => 66.60,
-            'visibility' => Product\Visibility::VISIBILITY_BOTH
+            'price' => 66.60
         ],
     ];
 
     /**
+     * @var DirectoryList
+     */
+    private DirectoryList $directoryList;
+
+    /**
+     * private Resource $resource;
+     *
+     * /**
      * @param State $state
      * @param ModuleDataSetupInterface $moduleDataSetup
      * @param Logger $logger
@@ -187,7 +192,9 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
      * @param CategoryFilterService $categoryFilterService
      * @param AssetRepository $assetRepository
      * @param OptionInterface $optionInterface
+     * @param DirectoryList $directoryList
      * @param LinkInterface $linkInterface
+     * @param Resource $resource
      */
     public function __construct(
         State $state,
@@ -200,7 +207,9 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
         CategoryFilterService $categoryFilterService,
         AssetRepository $assetRepository,
         OptionInterface $optionInterface,
-        LinkInterface $linkInterface
+        DirectoryList $directoryList,
+        LinkInterface $linkInterface,
+        Resource $resource
     ) {
         $this->storeManager = $storeManager;
         $this->productFactory = $productFactory;
@@ -214,6 +223,8 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
         $this->state = $state;
         $this->optionInterface = $optionInterface;
         $this->linkInterface = $linkInterface;
+        $this->resource = $resource;
+        $this->directoryList = $directoryList;
     }
 
     /**
@@ -238,13 +249,12 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
     public function apply():void
     {
         $this->moduleDataSetup->getConnection()->startSetup();
-        //$this->revert();
         try {
             $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
             foreach (self::PRODUCTS as $name => $entity) {
                 $this->fetchOrCreateProduct($name, $entity);
             }
-        } catch (NoSuchEntityException|LocalizedException $e) {
+        } catch (\Exception $e) {
             $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['patch' => 'CreateProducts']);
             return;
         }
@@ -262,6 +272,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             /** @var Product $prod */
             $prod = $this->productRepository->get($entity['sku']);
         } catch (NoSuchEntityException $e) {
+            // Catch exception and continue
             $prod = false;
         }
         if (!$prod) {
@@ -270,20 +281,17 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
                     case 'simple':
                     case 'virtual':
                         $this->createProduct($productName, $entity);
-                        $this->logger->info('[Tan_InitCatalog] Created product SKU: ' . $entity['sku']);
+//                        $this->logger->debug('[Tan_InitCatalog] Created product SKU: ' . $entity['sku']);
                         break;
-                    case 'configurable':
-                        // Create simple products first
+                    case 'variation':
+                        // Create simple products based on variation
                         foreach ($entity['jar'] as $option) {
-                            $optionProduct = array_replace($entity, ['sku' => $entity['sku'] . '-' . $option]);
-                            $this->createConfigurableOption($productName, $optionProduct, $option);
-                            $this->logger->info('[Tan_InitCatalog] Created option SKU: ' . $entity['sku']);
-                        }
-                        // Create configurable
-                        if (isset($this->_options[$entity['sku']])) {
-                            $configurable = array_replace($entity, ['options' => $this->_options[$entity['sku']]]);
-                            $this->createProduct($productName, $configurable);
-                            $this->logger->info('[Tan_InitCatalog] Created configurable SKU: ' . $entity['sku']);
+                            $optionProduct = array_replace($entity, [
+                                'sku' => $entity['sku'] . '-' . $option,
+                            ]);
+                            $productName = str_replace("-", " ", $optionProduct['sku']);
+                            $this->createVariation($productName, $optionProduct, str_replace('-', ' ', $option));
+//                            $this->logger->debug('[Tan_InitCatalog] Created variation SKU: ' . $entity['sku']);
                         }
                         break;
                     case 'bundle':
@@ -292,14 +300,14 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
                             $this->_options[$entity['sku']][] = $id;
                         }
                         $this->createProduct($productName, $entity);
-                        $this->logger->info('[Tan_InitCatalog] Created bundle SKU: ' . $entity['sku']);
+//                        $this->logger->debug('[Tan_InitCatalog] Created bundle SKU: ' . $entity['sku']);
                         break;
                 }
             } catch (\Exception $e) {
                 $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['sku' => $entity['sku']]);
             }
         } else {
-            $this->logger->info('[Tan_InitCatalog] Found product: ' . $productName, ['sku' => $entity['sku']]);
+            $this->logger->debug('[Tan_InitCatalog] Skipping existing product: ' . $productName, ['sku' => $entity['sku']]);
         }
     }
 
@@ -311,7 +319,6 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
     protected function createProduct(string $productName, array $entity): void
     {
         try {
-            $categoryIds = $this->getCategoryIds($entity['categories']);
             $product = $this->productFactory->create();
             $product->setName($productName);
             $product->setTypeId($entity['type']);
@@ -328,22 +335,15 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             }
             $product->setWebsiteIds([$this->storeManager->getDefaultStoreView()->getWebsiteId()]);
             $product->setUrlKey($entity['sku']);
-            $product->setVisibility($entity['visibility']);
+            $product->setVisibility(Product\Visibility::VISIBILITY_BOTH);
             $product->setPrice($entity['price']);
 
-//            if (str_contains($entity['sku'], self::DEMO_IMAGES_SKU) && $entity['jar'] === self::DEMO_IMAGES_JAR)  {
-//                $image = $this->assetRepository
-//                    ->getUrl('Tan_InitCatalog::images/' . $entity['pungency'] . '.jpg');
-//                $product->addImageToMediaGallery(
-//                    $image,
-//                    ['image', 'small_image', 'thumbnail'],
-//                    false,
-//                    false
-//                );
-//            } //TODO fix before running
-
-            if ($entity['type'] === 'configurable') {
-                $product->setAssociatedProductIds($this->_options[$entity['sku']]);
+            try {
+                if (str_contains($entity['sku'], self::DEMO_IMAGES_SKU) && str_contains($entity['sku'], self::DEMO_IMAGES_JAR)) {
+                    $product = $this->setImages($product, $entity['pungency']);
+                }
+            } catch (\Exception $e) {
+                $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['sku' => $entity['sku']]);
             }
 
             $stock = [
@@ -397,27 +397,17 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
                 $extensionAttributes->setBundleProductOptions($options);
                 $product->setShipmentType(0);
             }
-
-            if (!empty($categoryIds)) {
-                $links = [];
-                $pos = 0;
-                foreach ($categoryIds as $categoryId) {
-                    $links[] = [
-                        'position' => $pos,
-                        'category_id' => $categoryId
-                    ];
-                }
-                $extensionAttributes->setCategoryLinks($links);
-                $this->categoryLinkManagement->assignProductToCategories($entity['sku'], $categoryIds);
-            }
-
-            $product->setCategoryIds($categoryIds);
             $product->setExtensionAttributes($extensionAttributes);
             $product = $this->productRepository->save($product);
 
-            if ($entity['visibility'] == Product\Visibility::VISIBILITY_NOT_VISIBLE) {
-                preg_match("/(salsa-)+[a-z]+/i", $entity['sku'], $sku);
-                $this->_options[$sku[0]][] = $product->getId();
+            $categoryIds = $this->getCategoryIds($entity['categories']);
+            if (!empty($categoryIds)) {
+                $this->categoryLinkManagement->assignProductToCategories($product->getSku(), $categoryIds);
+//                $this->logger->debug('[Tan_InitCatalog] Assigned product to categories: ' . implode(', ', $categoryIds),
+//                    ['sku' => $product->getSku()]
+//                );
+            } else {
+                $this->logger->error('[Tan_InitCatalog] Category assignment issue, product not added: ' . $productName);
             }
         } catch (\Exception $e) {
             $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['name' => $productName]);
@@ -430,7 +420,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
      * @param string $option
      * @return void
      */
-    protected function createConfigurableOption(string $productName, array $entity, string $option): void
+    protected function createVariation(string $productName, array $entity, string $option): void
     {
         try {
             foreach ($entity['pungency'] as $pungency) {
@@ -441,8 +431,8 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
                     ['jar' => $option],
                     ['visibility' => Product\Visibility::VISIBILITY_NOT_VISIBLE]
                 );
-                $this->createProduct($productName, $simple);
-                $this->logger->info('[Tan_InitCatalog] Created option product SKU: ' . $simple['sku']);
+                $this->createProduct(ucwords($productName) . ' ' . ucfirst($pungency), $simple);
+//                $this->logger->debug('[Tan_InitCatalog] Created option product SKU: ' . $simple['sku']);
             }
         } catch (\Exception $e) {
             $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['name' => $productName]);
@@ -459,7 +449,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
         try {
             foreach ($categories as $k => $parent) {
                 $id = $this->categoryFilterService->getCategoryIdByName($parent);
-                if ($id) {
+                if ($id > 0) {
                     $categoryIds[] = $id;
                 }
             }
@@ -469,30 +459,71 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
         return $categoryIds;
     }
 
+    /**
+     * @param Product $product
+     * @param string $fileName
+     * @return Product
+     */
+    private function setImages(Product $product, string $fileName): Product
+    {
+        $imageUrl = $this->storeManager->getStore()->getBaseUrl()
+            . 'static/frontend/Tan/theme/en_US/images/' . $fileName . '.jpg';
+        try {
+            $tmpDir = $this->directoryList->getPath(DirectoryList::MEDIA) . DIRECTORY_SEPARATOR . 'tmp';
+            $this->assetRepository->checkAndCreateFolder($tmpDir);
+            $newImageFile = $tmpDir . basename($imageUrl);
+            $imageFile = $this->assetRepository->read($imageUrl, $newImageFile);
+            if ($imageFile) {
+                $product->addImageToMediaGallery(
+                    $newImageFile,
+                    ['image', 'small_image', 'thumbnail'],
+                    true
+                );
+//                $this->logger->debug('[Tan_InitCatalog] Image added: ' . $newImageFile);
+            }
+        } catch (NoSuchEntityException|LocalizedException $e) {
+            $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['imageUrl' => $imageUrl]);
+        }
+        return $product;
+    }
 
     /**
      * @return void
      */
     public function revert():void
     {
-        /** Run this method after deleting patch from patch_list */
-        try {
-            foreach (self::PRODUCTS as $name => $entity) {
-                $product = $this->productRepository->get($entity['sku']);
-                $options = $product->getOptions();
-                if (!empty($options)) {
-                    foreach ($options as $option) {
-                        $child = $this->productRepository->get($option->getSku());
-                        $name = $child->getName();
-                        $this->productRepository->delete($child);
-                        $this->logger->info('[Tan_InitCatalog] Deleted product: ' . $name);
+        $this->moduleDataSetup->getConnection()->startSetup();
+        foreach (self::PRODUCTS as $name => $entity) {
+            $sku = $entity['sku'];
+            if ($entity['type'] == 'variation') {
+                $sku = '';
+                foreach ($entity['jar'] as $jar) {
+                    foreach ($entity['pungency'] as $pungency) {
+                        $sku = $entity['sku'] . '-' . $jar . '-' . $pungency;
+                        $this->deleteProduct($sku);
                     }
                 }
-                $this->productRepository->delete($product);
-                $this->logger->info('[Tan_InitCatalog] Deleted product: ' . $name);
+            } else {
+                $this->deleteProduct($sku);
             }
+        }
+        $this->moduleDataSetup->getConnection()->endSetup();
+    }
+
+    /**
+     * @param string $sku
+     * @return void
+     */
+    protected function deleteProduct(string $sku): void
+    {
+        try {
+            $product = $this->productRepository->get($sku);
+            $this->productRepository->delete($product);
+            $this->logger->info('[Tan_InitCatalog] Deleted product: ' . $sku);
         } catch (\Exception $e) {
-            $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['patch' => 'CreateProducts']);
+            $this->logger->error('[Tan_InitCatalog] Error deleting product: ' . $e->getMessage(),
+                ['trace' => $e->getTraceAsString()]
+            );
         }
     }
 }

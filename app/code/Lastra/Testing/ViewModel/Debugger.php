@@ -16,6 +16,7 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 use Tan\Catalog\Model\Category\CategoryFilterService as Test;
 use Magento\Framework\View\Asset\Repository as Repository;
+use Tan\InitCatalog\Setup\Patch\Data\CreateProducts;
 
 class Debugger implements ArgumentInterface
 {
@@ -41,10 +42,13 @@ class Debugger implements ArgumentInterface
     {
         $html = [];
         try {
-            $id = $this->test->getCategoryIdByName('Satan\'s favorites') ?: 'not found';
-            $html = array_merge($html, [
-                'Testing class' => Test::class,
-                'Result' => "getCategoryIdByName('Satan's favorites'): " . $id]);
+            $html = array_merge($html, ['Testing class' => Test::class]);
+            foreach (CreateProducts::PRODUCTS as $product => $entity) {
+                foreach ($entity['categories'] as $category) {
+                    $theId = $this->test->getCategoryIdByName($category);
+                    $html = array_merge($html, [$category => strval($theId)]);
+                }
+            }
         } catch (\Exception $e) {
             $html = ['Error' => $e->getMessage()];
         }

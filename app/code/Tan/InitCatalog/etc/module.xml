@@ -4,6 +4,8 @@
     <module name="Tan_InitCatalog">
         <sequence>
             <module name="Tan_Catalog"/>
+            <module name="Tan_InitTheme"/>
+            <module name="Tan_InitConfig"/>
         </sequence>
     </module>
 </config>
