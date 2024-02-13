@@ -333,9 +333,9 @@ return [
         'Tan_Catalog' => 1,
         'Tan_Checkout' => 1,
         'Tan_Customer' => 1,
-        'Tan_InitCatalog' => 1,
         'Tan_InitConfig' => 1,
         'Tan_InitTheme' => 1,
+        'Tan_InitCatalog' => 1,
         'Tan_Theme' => 1,
         'Temando_ShippingRemover' => 1
     ]
