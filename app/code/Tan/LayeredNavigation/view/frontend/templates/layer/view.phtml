@@ -46,4 +46,8 @@
         <?php endif; ?>
         </div>
     </div>
+<?php else: ?>
+<div class="block empty">
+    <span><?= $block->escapeHtml(__('Filters not available yet')) ?></span>
+</div>
 <?php endif; ?>

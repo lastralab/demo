@@ -23,9 +23,9 @@ class Jar extends AbstractSource
     {
         if (!$this->_options) {
             $this->_options = [
-                ['label' => __('946 ml'), 'value' => 'one-liter'],
-                ['label' => __('473 ml'), 'value' => 'half-liter'],
-                ['label' => __('60 ml'), 'value' => 'baby']
+                ['label' => __('946ml'), 'value' => 'one-liter'],
+                ['label' => __('473ml'), 'value' => 'half-liter'],
+                ['label' => __('60ml'), 'value' => 'baby']
             ];
         }
         return $this->_options;
