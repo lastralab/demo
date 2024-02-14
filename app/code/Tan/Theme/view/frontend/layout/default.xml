@@ -17,8 +17,22 @@
             </arguments>
         </referenceBlock>
 
+        <block class="Magento\Framework\View\Element\Template" name="catalog.compare.link" after="-"
+               template="Tan_Catalog::product/compare/link.phtml">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="compareProducts" xsi:type="array">
+                            <item name="component" xsi:type="string">Magento_Catalog/js/view/compare-products</item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </block>
+
         <move element="top.search" destination="header-wrapper" after="store_name"/>
         <move element="breadcrumbs" destination="main.content" before="-"/>
+        <move element="catalog.compare.link" destination="top.links" />
 
         <referenceBlock name="advanced-search-link" remove="true"/>
         <referenceBlock name="wish-list-link" remove="true" />
@@ -26,6 +40,8 @@
         <referenceBlock name="currency" remove="true"/>
         <referenceBlock name="store.settings.currency" remove="true" />
         <referenceBlock name="wishlist_sidebar" remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true" />
+        <referenceBlock name="sidebar.additional" remove="true"/>
 
     </body>
 </page>
