@@ -7,7 +7,7 @@ Check <a href="https://github.com/lastralab/demo/blob/main/app/code/README.md">a
 Desktop:
 
 ![image](https://github.com/lastralab/demo/assets/22894897/b17ab4f9-35c6-4084-9d43-6a97045a34c5)
-![image](https://github.com/lastralab/demo/assets/22894897/e272ffeb-ef90-492b-89c8-e841fa4a640d)
+![image](https://github.com/lastralab/demo/assets/22894897/8b4093cc-b128-439f-be46-9071409787a7)
 
 
 Mobile
