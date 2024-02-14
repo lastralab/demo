@@ -1,0 +1,43 @@
+<?php
+/** @var \Magento\Customer\Block\Account\Dashboard\Address $block */
+?>
+<div class="block block-dashboard-addresses">
+    <div class="block-content">
+        <div class="box box-billing-address">
+            <strong class="box-title">
+                <?= $block->escapeHtml(__('Default Billing Address')) ?>
+            </strong>
+            <div class="box-content">
+                <address>
+                    <?= $block->getPrimaryBillingAddressHtml() ?>
+                </address>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?= $block->escapeUrl($block->getPrimaryBillingAddressEditUrl()) ?>"
+                   data-ui-id="default-billing-edit-link">
+                    <span title="<?= $block->escapeHtml(__('Edit Address'))?>">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="box box-shipping-address">
+            <strong class="box-title">
+                <span><?= $block->escapeHtml(__('Default Shipping Address')) ?></span>
+            </strong>
+            <div class="box-content">
+                <address>
+                    <?= $block->getPrimaryShippingAddressHtml() ?>
+                </address>
+            </div>
+            <div class="box-actions">
+                <a class="action edit" href="<?= $block->escapeUrl($block->getPrimaryShippingAddressEditUrl()) ?>"
+                   data-ui-id="default-shipping-edit-link">
+                    <span title="<?= $block->escapeHtml(__('Edit Address'))?>">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<?php
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Button $block */
+?>
+
+<?php if ($block->getWishlist()->getItemsCount()) : ?>
+    <button type="submit" name="do"
+            title="<?= $block->escapeHtmlAttr(__('Update Wish List')) ?>" class="action update desktop">
+        <span title="<?= $block->escapeHtml(__('Update Wish List')) ?>">
+            <i class="fa-solid fa-rotate"></i>
+        </span>
+    </button>
+<?php endif;?>

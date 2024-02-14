@@ -338,7 +338,9 @@ return [
         'Tan_InitCatalog' => 1,
         'Tan_LayeredNavigation' => 1,
         'Tan_Review' => 1,
+        'Tan_Sales' => 1,
         'Tan_Theme' => 1,
+        'Tan_Wishlist' => 1,
         'Temando_ShippingRemover' => 1
     ]
 ];

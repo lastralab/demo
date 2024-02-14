@@ -43,7 +43,7 @@ class AccountLink extends Link
                 $html = '
                     <li class="my-account-top-link">
                         <a href="' . $this->getBaseUrl() . $this->getPath() . '" title="' . $this->escapeHtml($this->getLabel()) . '">
-                             <i class="fa-solid fa-user"></i>
+                             <i class="fa-solid fa-user-gear"></i>
                          </a>
                     </li>
                 ';
