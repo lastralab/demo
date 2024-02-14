@@ -336,6 +336,7 @@ return [
         'Tan_InitConfig' => 1,
         'Tan_InitTheme' => 1,
         'Tan_InitCatalog' => 1,
+        'Tan_LayeredNavigation' => 1,
         'Tan_Review' => 1,
         'Tan_Theme' => 1,
         'Temando_ShippingRemover' => 1

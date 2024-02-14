@@ -21,6 +21,6 @@ class ReviewRenderer extends ParentRenderer
      */
     protected $_availableTemplates = [
         self::FULL_VIEW => 'Tan_Review::helper/summary.phtml',
-        self::SHORT_VIEW => 'Magento_Review::helper/summary_short.phtml',
+        self::SHORT_VIEW => 'Tan_Review::helper/summary_short.phtml',
     ];
 }
