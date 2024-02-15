@@ -1,0 +1,13 @@
+<?php
+
+/** @var $block \Magento\Checkout\Block\Cart\Item\Renderer\Actions\Edit */
+?>
+<?php if ($block->isProductVisibleInSiteVisibility()) :?>
+    <a class="action action-edit"
+       href="<?= $block->escapeUrl($block->getConfigureUrl()) ?>"
+       title="<?= $block->escapeHtmlAttr(__('Edit item parameters')) ?>">
+        <span title="<?= $block->escapeHtml(__('Edit')) ?>">
+            <i class="fa-regular fa-pen-to-square"></i>
+        </span>
+    </a>
+<?php endif ?>
