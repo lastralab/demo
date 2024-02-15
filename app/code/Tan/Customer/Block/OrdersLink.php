@@ -40,7 +40,7 @@ class OrdersLink extends Link
 
         if ($this->session->getCustomerId() !== null) {
             $html = '<div class="my-orders-top-link"><button type="button">
-                    <a href="'. $this->getBaseUrl() . $this->getPath() . '" title="Order History">'
+                    <a href="'. $this->getBaseUrl() . $this->getPath() . '" title="Order History" class="action">'
                 . $this->escapeHtml($this->getLabel()) .
                 '</a></button>
                 </div>

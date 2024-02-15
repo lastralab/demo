@@ -1,41 +1,34 @@
 
 ////  Color nesting
-@theme__color__primary: darken(@color-brownie1, 10%);
-@theme__color__primary-alt: #006341;
-@theme__color__secondary: @color-brownie1;
+@theme__color__primary: #006341;
+@theme__color__primary-alt: darken(@color-brownie1, 5%);
+@theme__color__secondary: @color-red11;
 //
 @link__color: darken(@color-dark-green1, 5%);
 @link__hover__color: lighten(@color-dark-green1, 5%);
 
 //  Buttons
-@button__color: @color-gray20;
-@button__background: @color-gray80;
-@button__border: 1px solid @border-color__base;
+@button__color: @color-white;
+@button__background: @theme__color__primary;
+@button__border: 1px solid transparent;
 
 //  Primary button
-//@button-primary__background: @color-brownie;
-//@button-primary__border: 1px solid @color-brownie1;
-//@button-primary__color: @color-white;
-//@button-primary__hover__background: darken(@color-brownie, 5%);
-//@button-primary__hover__border: 1px solid @color-brownie1;
-//@button-primary__hover__color: @color-white;
-
-//@button-primary__background: @color-orange-red1;
-//@button-primary__border: 1px solid @color-orange-red2;
-//@button-primary__color: @color-white;
-//@button-primary__hover__background: darken(@color-orange-red1, 5%);
-//@button-primary__hover__border: 1px solid @color-orange-red2;
-//@button-primary__hover__color: @color-white;
+@button-primary__background: darken(#006341, 5%);
+@button-primary__border: 1px solid transparent;
+@button-primary__color: @color-white;
+@button-primary__hover__background: lighten(@color-brownie1, 5%);
+@button-primary__hover__border: 1px solid transparent;
+@button-primary__hover__color: @color-white;
 
 //Navigation
-@navigation-level0-item__color: @color-red11;
+@navigation-level0-item__color: @color-brownie1;
 @submenu-item__color: darken(@color-red11, 5%);
 
-//@navigation__background: @color-gray40;
-//@navigation-desktop-level0-item__color: @color-gray80;
-//@navigation-desktop-level0-item__hover__color: @color-gray34;
-//@navigation-desktop-level0-item__active__color: @navigation-desktop-level0-item__color;
-//
+@navigation__background: @color-white;
+@navigation-desktop-level0-item__color: @color-brownie1;
+@navigation-desktop-level0-item__hover__color: darken(@color-red11, 5%);
+@navigation-desktop-level0-item__active__color: darken(@color-red11, 5%);
+
 ////  Tabs
 //@tab-control__background-color: @page__background-color;
 
