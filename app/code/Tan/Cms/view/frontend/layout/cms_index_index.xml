@@ -3,7 +3,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-           <block name="vue.test" template="Tan_Cms::vue-test.phtml">
+           <block name="vue.test" class="Magento\Framework\View\Element\Template" template="Tan_Cms::vue-test.phtml">
                <arguments>
                    <argument name="weather_view_model" xsi:type="object">Tan\Cms\ViewModel\Message</argument>
                </arguments>
