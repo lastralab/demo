@@ -10,8 +10,8 @@ Backend:
 
 Frontend Desktop:
 
-![image](https://github.com/lastralab/demo/assets/22894897/7f4236c5-2731-4ff0-a83d-bc44597d4806)
-![image](https://github.com/lastralab/demo/assets/22894897/edf0cdfc-58da-467f-b7ea-aa0e5aac7e69)
+![image](https://github.com/lastralab/demo/assets/22894897/87c9d05a-a246-4460-8664-fc26c5dc60e5)
+![image](https://github.com/lastralab/demo/assets/22894897/4186d0f8-c9c2-44b0-8392-9ad8cd56f22b)
 
 Frontend Mobile:
 
