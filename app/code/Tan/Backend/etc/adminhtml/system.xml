@@ -11,7 +11,7 @@
             <tab>tanismo</tab>
             <resource>Magento_Backend::admin</resource>
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Weather Configuration</label>
+                <label>Temperature Message Configuration</label>
                 <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Module Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -28,7 +28,22 @@
                     <label>Show Temperature Unit</label>
                     <validate>required-entry</validate>
                     <source_model>Tan\Backend\Model\Config\Source\ShowUnit</source_model>
-                    <comment>Display temperature in Celsius/Farenheit</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="cold_message" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Cold Message</label>
+                    <comment>Message to display if temperature is below 15°C</comment>
+                    <validate>validate-no-html-tags</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="hot_message" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hot Message</label>
+                    <comment>Message to display if temperature is above 15°C.</comment>
+                    <validate>validate-no-html-tags</validate>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>
