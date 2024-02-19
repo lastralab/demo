@@ -6,6 +6,8 @@
                 <enabled>1</enabled>
                 <default_ip>73.145.135.216</default_ip>
                 <show_unit>2</show_unit>
+                <cold_message>... Have some whiskey!</cold_message>
+                <hot_message>... Perfect for an IPA!</hot_message>
             </general>
         </weather>
     </default>

@@ -26,6 +26,8 @@ class Message implements ArgumentInterface
 
     /** @var Serializer  */
     private Serializer $serializer;
+
+    /** @var WeatherConfig  */
     private WeatherConfig $weatherData;
 
     /**
@@ -51,6 +53,22 @@ class Message implements ArgumentInterface
      */
     public function getMessage(): string
     {
+        return $this->getCurrentTemperature();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return (bool) $this->weatherData->getGeneralConfig('enabled');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCurrentTemperature(): string
+    {
         $ip = $this->remoteAddress->getRemoteAddress();
         $data = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=" . $ip));
 
@@ -73,15 +91,11 @@ class Message implements ArgumentInterface
             default => round($celsius) . "°C / " . round($celsius * 9 / 5 + 32) . "°F",
         };
 
-        return $city . ', ' . $state . ": " . $degrees;
-    }
+        $annoyingMessage = (int) $celsius > 15
+            ? $this->weatherData->getGeneralConfig('hot_message')
+            : $this->weatherData->getGeneralConfig('cold_message');
 
-    /**
-     * @return bool
-     */
-    public function isEnabled(): bool
-    {
-        return (bool) $this->weatherData->getGeneralConfig('enabled');
+        return $city . ', ' . $state . " is " . $degrees . $annoyingMessage;
     }
 
     /**
