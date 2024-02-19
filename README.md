@@ -5,12 +5,11 @@ A list of [in-progress] demonstration modules developed for Magento 2.4.6-p3 Com
 Check <a href="https://github.com/lastralab/demo/blob/main/app/code/README.md">app/code/README.md</a> for a preview of each module
 
 Backend:
-![image](https://github.com/lastralab/demo/assets/22894897/63437b3d-fd76-4c1d-b548-2bf7f174f318)
-
+![image](https://github.com/lastralab/demo/assets/22894897/76593e5e-5d3a-4186-9353-72eb65138d89)
 
 Frontend Desktop:
 
-![image](https://github.com/lastralab/demo/assets/22894897/5b030eeb-ea6d-480e-bb52-3f846494d58e)
+![image](https://github.com/lastralab/demo/assets/22894897/5321c83c-8854-44ca-9ece-1eea346574c9)
 ![image](https://github.com/lastralab/demo/assets/22894897/4186d0f8-c9c2-44b0-8392-9ad8cd56f22b)
 
 Frontend Mobile:
