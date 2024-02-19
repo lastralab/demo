@@ -15,7 +15,7 @@ Frontend Desktop:
 
 Frontend Mobile:
 
-<!--img src="https://github.com/lastralab/demo/assets/22894897/88607695-5145-446c-a898-87143e92312e" style="width:40%;"/> 
-<img src="https://github.com/lastralab/demo/assets/22894897/09480860-a9ad-42a9-b119-c9ef2cf50a33" style="width:40%;"/>-->
+<img src="https://github.com/lastralab/demo/assets/22894897/d62e5662-6ce9-4003-a411-8b326a041b63" style="height:700px;"/> 
+<img src="https://github.com/lastralab/demo/assets/22894897/e569a7b0-920f-4c88-a33d-0c412fd05b71" style="height:700px;"/>
 
 
