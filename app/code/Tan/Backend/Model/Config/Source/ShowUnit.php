@@ -3,16 +3,16 @@
  * Created by PhpStorm
  * User: tan
  * Project: Demo
- * Date: 02/05/2024
+ * Date: 02/19/2024
  */
 
 declare(strict_types=1);
 
-namespace Tan\InitCatalog\Model\Attribute\Source;
+namespace Tan\Backend\Model\Config\Source;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
 
-class Jar extends AbstractSource
+class ShowUnit extends AbstractSource
 {
     /**
      * Get all options
@@ -23,12 +23,11 @@ class Jar extends AbstractSource
     {
         if (!$this->_options) {
             $this->_options = [
-                ['label' => __('946ml'), 'value' => 'one-liter'],
-                ['label' => __('473ml'), 'value' => 'half-liter'],
-                ['label' => __('60ml'), 'value' => 'baby']
+                ['label' => __('Celsius'), 'value' => 0],
+                ['label' => __('Farenheit'), 'value' => 1],
+                ['label' => __('Both'), 'value' => 2]
             ];
         }
         return $this->_options;
     }
 }
-

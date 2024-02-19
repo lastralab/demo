@@ -1,0 +1,27 @@
+<?php
+/**
+ * Created by PhpStorm
+ * User: taniamolina
+ * Date: 4/17/23
+ * project: yorknow
+ */
+?>
+
+<?php
+/** @var Tan\Cms\ViewModel\Message $messageViewModel */
+$viewModel = $block->getData('weather_view_model');
+?>
+<?php if ($viewModel->isEnabled()): ?>
+<div id="vue-test">
+    <h2>Current temperature in {{ loading }}</h2>
+</div>
+    <script type="text/x-magento-init">
+        {
+            "#vue-test": {
+                "Tan_Cms/js/vue-test": {
+                    "loading": "<?= $viewModel->getMessage() ?>"
+            }
+        }
+    }
+    </script>
+<?php endif; ?>
