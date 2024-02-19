@@ -18,7 +18,7 @@
                 </field>
                 <field id="default_ip" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Default IP Address</label>
-                    <comment>Default IP to use for local environments.</comment>
+                    <comment>Default IP to use for local environments</comment>
                     <validate>required-entry no-whitespace</validate>
                     <depends>
                         <field id="enabled">1</field>
@@ -42,7 +42,7 @@
                 </field>
                 <field id="hot_message" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Hot Message</label>
-                    <comment>Message to display if temperature is above 15°C.</comment>
+                    <comment>Message to display if temperature is above 15°C</comment>
                     <validate>validate-no-html-tags</validate>
                     <depends>
                         <field id="enabled">1</field>

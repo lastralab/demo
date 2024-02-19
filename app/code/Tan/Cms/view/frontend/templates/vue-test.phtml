@@ -13,7 +13,9 @@ $viewModel = $block->getData('weather_view_model');
 ?>
 <?php if ($viewModel->isEnabled()): ?>
 <div id="vue-test">
-    <h2><i class="fa-solid fa-temperature-low"></i> Current temperature in {{ loading }}</h2>
+    <h2>
+        <i class="fa-solid fa-temperature-half"></i> Current temperature in {{ loading }}
+    </h2>
 </div>
     <script type="text/x-magento-init">
         {
