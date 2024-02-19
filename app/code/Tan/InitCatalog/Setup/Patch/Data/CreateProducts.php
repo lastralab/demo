@@ -92,40 +92,41 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
     private LinkInterface $linkInterface;
 
     public const PRODUCTS = [
-        'Salsa Verde' => [
-            'type' => 'variation',
-            'sku' => self::DEMO_IMAGES_SKU,
+        'Salsa Verde Baby Spicy' => [
+            'type' => 'simple',
+            'sku' => self::DEMO_IMAGES_SKU . '-baby-spicy',
             'options' => [],
             'description' => 'Ideal for chilaquiles, enchiladas and/or eat with chips',
-            'categories' => ['Mexican', "Satan's favorites"],
-            'pungency' => ['mild', 'satan-s-kiss', 'spicy'],
-            'jar' => ['one-liter', 'half-liter', 'baby'],
+            'categories' => ['Samplers'],
+            'pungency' => 'spicy',
+            'jar' => 'baby',
             'vegan' => 1,
             'signature' => 1,
             'increments' => 15.00,
             'price' => 15.00,
             'weight' => 1.50,
-            'visibility' => Product\Visibility::VISIBILITY_BOTH
+            'visibility' => Product\Visibility::VISIBILITY_NOT_VISIBLE
         ],
-        'Salsa Chipotle' => [
-            'type' => 'variation',
-            'sku' => 'salsa-chipotle',
+        'Salsa Chipotle Baby Spicy' => [
+            'type' => 'simple',
+            'sku' => 'salsa-chipotle-baby-spicy',
             'options' => [],
             'description' => 'Ideally for tuna flautas',
-            'categories' => ['Mexican', 'Cute salsas'],
-            'pungency' => ['spicy'],
-            'jar' => ['one-liter', 'half-liter', 'baby'],
+            'categories' => ['Samplers'],
+            'pungency' => 'spicy',
+            'jar' => 'baby',
             'vegan' => 0,
             'signature' => 1,
             'increments' => 10.00,
             'price' => 10.00,
-            'weight' => 1.50
+            'weight' => 1.50,
+            'visibility' => Product\Visibility::VISIBILITY_NOT_VISIBLE
         ],
         'Sesame Sauce' => [
             'type' => 'simple',
             'sku' => 'sesame-sauce',
             'description' => 'Ideal for sashimi',
-            'categories' => ['Other', 'For fish'],
+            'categories' => ['Other', 'For fish', 'Samplers'],
             'pungency' => 'satan-s-kiss',
             'jar' => 'baby',
             'vegan' => 1,
@@ -135,9 +136,9 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
         ],
         'Carrot Ginger Dressing' => [
             'type' => 'simple',
-            'sku' => 'carrot-dressing',
+            'sku' => 'carrot-ginger-dressing',
             'description' => 'Ideal for lettuce salad',
-            'categories' => ['Other', 'Sweet Hot'],
+            'categories' => ['Other', 'Sweet Hot', 'Samplers'],
             'pungency' => 'mild',
             'jar' => 'baby',
             'vegan' => 1,
@@ -150,7 +151,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             'sku' => 'sampler-bundle',
             'dynamic_sku' => 0,
             'skus' => [
-                'carrot-dressing',
+                'carrot-ginger-dressing',
                 'sesame-sauce',
                 'salsa-chipotle-baby-spicy',
                 'salsa-verde-baby-spicy'
@@ -209,7 +210,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
         OptionInterface $optionInterface,
         DirectoryList $directoryList,
         LinkInterface $linkInterface,
-        Resource $resource
+        Resource $resource,
     ) {
         $this->storeManager = $storeManager;
         $this->productFactory = $productFactory;
@@ -283,23 +284,12 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
                         $this->createProduct($productName, $entity);
 //                        $this->logger->debug('[Tan_InitCatalog] Created product SKU: ' . $entity['sku']);
                         break;
-                    case 'variation':
-                        // Create simple products based on variation
-                        foreach ($entity['jar'] as $option) {
-                            $optionProduct = array_replace($entity, [
-                                'sku' => $entity['sku'] . '-' . $option,
-                            ]);
-                            $productName = str_replace("-", " ", $optionProduct['sku']);
-                            $this->createVariation($productName, $optionProduct, str_replace('-', ' ', $option));
-//                            $this->logger->debug('[Tan_InitCatalog] Created variation SKU: ' . $entity['sku']);
-                        }
-                        break;
                     case 'bundle':
                         foreach ($entity['skus'] as $sku) {
                             $id = $this->productRepository->get($sku)->getId();
-                            $this->_options[$entity['sku']][] = $id;
+                            $this->_options[$entity['sku']][$sku] = $id;
                         }
-                        $this->createProduct($productName, $entity);
+//                        $this->createProduct($productName, $entity);
 //                        $this->logger->debug('[Tan_InitCatalog] Created bundle SKU: ' . $entity['sku']);
                         break;
                 }
@@ -326,16 +316,16 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             $product->setStatus(Product\Attribute\Source\Status::STATUS_ENABLED);
             $product->setSku($entity['sku']);
             if ($entity['type'] !== 'virtual' && $entity['type'] !== 'bundle') {
-                $product->setCustomAttribute('description', $entity['description']);
                 $product->setCustomAttribute('pungency', $entity['pungency']);
                 $product->setCustomAttribute('signature', $entity['signature']);
-                $product->setCustomAttribute('jar', $entity['jar']);
-                $product->setCustomAttribute('vegan', $entity['vegan']);
                 $product->setWeight($entity['weight']);
+                $product->setCustomAttribute('vegan', $entity['vegan']);
+                $product->setCustomAttribute('jar', $entity['jar']);
             }
+            $product->setCustomAttribute('description', $entity['description']);
             $product->setWebsiteIds([$this->storeManager->getDefaultStoreView()->getWebsiteId()]);
             $product->setUrlKey($entity['sku']);
-            $product->setVisibility(Product\Visibility::VISIBILITY_BOTH);
+            $product->setVisibility(isset($entity['visibility']) ? $entity['visibility'] : Product\Visibility::VISIBILITY_BOTH);
             $product->setPrice($entity['price']);
 
             try {
@@ -358,44 +348,60 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             $extensionAttributes = $product->getExtensionAttributes();
 
             if ($entity['type'] === 'bundle') {
-                /** @var Product $product */
-                $optionsData = [];
-                $selectionsData = [];
-                $options = [];
-                $id = 1;
-                $optionsMap = array_combine($this->_options[$entity['sku']], $entity['skus']);
-                foreach ($optionsMap as $optionId => $optionSku) {
-                    $data = [
-                        'title' => ucfirst(str_replace($optionSku, '-', ' ')),
-                        'type' => ProductCustomOptionInterface::OPTION_TYPE_MULTIPLE,
-                        'required' => 1,
-                        'delete' => ''
-                    ];
-                    $optionsData[] = $data;
-                    $option = $this->optionInterface->setData($data)->setSku($entity['sku'])->setOptionId($id);
-                    $linkData = [
-                        [
+                try { // TODO fix bundle options
+                    $optionsData = [];
+                    $selectionsData = [];
+                    $options = [];
+                    $links = [];
+                    $product->setCustomAttribute('signature', 1);
+                    $product->setWeight(1.5);
+                    $product->setCustomAttribute('vegan', 0);
+                    $product->setCustomAttribute('jar', 'baby');
+                    $product->setCustomAttribute('price_view', 1); // AS_LOW_AS
+                    $i = 1;
+                    foreach ($this->_options[$entity['sku']] as $optionSku => $optionId) {
+                        $data = [
+                            'option_id' => null,
+                            'store_id' => $this->storeManager->getStore()->getId(),
+                            'title' => ucwords(str_replace('-', ' ', $optionSku)),
+                            'type' => ProductCustomOptionInterface::OPTION_TYPE_MULTIPLE,
+                            'required' => 1,
+                            'delete' => ''
+                        ];
+                        $optionsData[] = $data;
+                        $option = $this->optionInterface
+                            ->setData($data)
+                            ->setSku($entity['sku']);
+
+                        $linkData = [
                             [
-                                'product_id' => $optionId,
-                                'selection_qty' => 1,
-                                'selection_can_change_qty' => 0,
-                                'delete' => ''
+                                [
+                                    'product_id' => $optionId,
+                                    'selection_qty' => 1,
+                                    'selection_can_change_qty' => 0,
+                                    'delete' => ''
+                                ]
                             ]
-                        ]
-                    ];
-                    $link = $this->linkInterface
-                        ->setData($linkData)
-                        ->setSku($optionSku)
-                        ->setQty(1000)
-                        ->setCanChangeQuantity(0);
-                    $selectionsData[] = $linkData;
-                    $option->setProductLinks([$link]);
-                    $id++;
+                        ];
+                        $link = $this->linkInterface
+                            ->setData($linkData)
+                            ->setSku($optionSku)
+                            ->setQty(1)
+                            ->setCanChangeQuantity(0);
+                        $selectionsData[] = $linkData;
+                        $links[] = $link;
+                        $option->setProductLinks($links);
+                        $options[] = $option;
+                        $i++;
+                        $this->logger->debug('[Tan_InitCatalog] Added option ' . $optionSku. '['.$i.']');
+                    }
+                    $product->setPriceType(1);
+                    $product->setBundleOptionsData($optionsData)->setBundleSelectionsData($selectionsData);
+                    $extensionAttributes->setBundleProductOptions($options);
+                    $product->setShipmentType(0);
+                } catch (\Exception $e) {
+                    $this->logger->error('[Tan_InitCatalog] Bundle Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
                 }
-                $product->setCustomAttribute('price_view', 1); // AS_LOW_AS
-                $product->setBundleOptionsData($optionsData)->setBundleSelectionsData($selectionsData);
-                $extensionAttributes->setBundleProductOptions($options);
-                $product->setShipmentType(0);
             }
             $product->setExtensionAttributes($extensionAttributes);
             $product = $this->productRepository->save($product);
@@ -403,14 +409,14 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
             $categoryIds = $this->getCategoryIds($entity['categories']);
             if (!empty($categoryIds)) {
                 $this->categoryLinkManagement->assignProductToCategories($product->getSku(), $categoryIds);
-//                $this->logger->debug('[Tan_InitCatalog] Assigned product to categories: ' . implode(', ', $categoryIds),
-//                    ['sku' => $product->getSku()]
-//                );
+                $this->logger->debug('[Tan_InitCatalog] Assigned product to categories: ' . implode(', ', $categoryIds),
+                    ['sku' => $product->getSku()]
+                );
             } else {
                 $this->logger->error('[Tan_InitCatalog] Category assignment issue, product not added: ' . $productName);
             }
         } catch (\Exception $e) {
-            $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['name' => $productName]);
+            $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
         }
     }
 
@@ -432,7 +438,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
                     ['visibility' => Product\Visibility::VISIBILITY_NOT_VISIBLE]
                 );
                 $this->createProduct(ucwords($productName) . ' ' . ucfirst($pungency), $simple);
-//                $this->logger->debug('[Tan_InitCatalog] Created option product SKU: ' . $simple['sku']);
+                $this->logger->debug('[Tan_InitCatalog] Created option product SKU: ' . $simple['sku']);
             }
         } catch (\Exception $e) {
             $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['name' => $productName]);
@@ -480,7 +486,7 @@ class CreateProducts implements DataPatchInterface, PatchRevertableInterface
                     ['image', 'small_image', 'thumbnail'],
                     true
                 );
-//                $this->logger->debug('[Tan_InitCatalog] Image added: ' . $newImageFile);
+                $this->logger->debug('[Tan_InitCatalog] Image added: ' . $newImageFile);
             }
         } catch (NoSuchEntityException|LocalizedException $e) {
             $this->logger->error('[Tan_InitCatalog] Error: ' . $e->getMessage(), ['imageUrl' => $imageUrl]);
