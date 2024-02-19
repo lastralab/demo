@@ -5,7 +5,8 @@ A list of [in-progress] demonstration modules developed for Magento 2.4.6-p3 Com
 Check <a href="https://github.com/lastralab/demo/blob/main/app/code/README.md">app/code/README.md</a> for a preview of each module
 
 Backend:
-![image](https://github.com/lastralab/demo/assets/22894897/0f54a766-75d7-4ad0-8521-490e3e0e35d6)
+![image](https://github.com/lastralab/demo/assets/22894897/63437b3d-fd76-4c1d-b548-2bf7f174f318)
+
 
 Frontend Desktop:
 
