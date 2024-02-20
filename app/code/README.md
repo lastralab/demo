@@ -15,6 +15,16 @@ __Tan_InitCatalog (pending)__
         * Adds stock
         * Assigns products to categories
 
+__User Journeys__
+* Frontend:
+  
+https://github.com/lastralab/demo/assets/22894897/499b1ffe-1e9b-4ab1-9d5c-2322d4411fd9
+
+* Backend:
+
+  
+___Modules Summary___
+
 __Tan_Catalog__
 * Creates Category Filter Service
     * getCategoryIdByName()
@@ -37,3 +47,20 @@ __Tan_Customer__
 
 __Tan_LayeredNavigation__
 * Sets sidebar to move while scrolling
+* Changes title/subtitle
+
+__Tan_Review__
+* Limits reviews to only customers who have bought that product before
+
+__Tan_Sales__
+* Removes action column for recent orders
+* Order can be viewed by clicking on its order ID number
+
+__Tan_Theme__
+* Adds compare items link to the top links section
+* Adds 'go to top' link at the bottom for mobile
+* Adds block next to the logo to display the store name and link it to the contact us page
+* Adds wishlist link to the header, before the orders link
+
+__Tan_Wishlist__
+* Displays the products as a table
