@@ -1,5 +1,17 @@
 # Custom Modules
 
+__User Journeys__
+* Frontend:
+  
+https://github.com/lastralab/demo/assets/22894897/499b1ffe-1e9b-4ab1-9d5c-2322d4411fd9
+
+* Backend:
+
+https://github.com/lastralab/demo/assets/22894897/41fdc136-baa5-4f3f-805b-8f2d8c4f310a
+
+
+___Modules Summary___
+
 __Tan_InitConfig__
 * Sets basic configuration values in core_config_data
 
@@ -14,19 +26,7 @@ __Tan_InitCatalog (pending)__
         * Adds images to some products
         * Adds stock
         * Assigns products to categories
-
-__User Journeys__
-* Frontend:
-  
-https://github.com/lastralab/demo/assets/22894897/499b1ffe-1e9b-4ab1-9d5c-2322d4411fd9
-
-* Backend:
-
-https://github.com/lastralab/demo/assets/22894897/41fdc136-baa5-4f3f-805b-8f2d8c4f310a
-
-
-___Modules Summary___
-
+          
 __Tan_Catalog__
 * Creates Category Filter Service
     * getCategoryIdByName()
