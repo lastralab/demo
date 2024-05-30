@@ -1,0 +1,60 @@
+<?php // TODO refactor and get style out of here
+    $coupon = $block->getCouponCode();
+?>
+<?php if ($block->getHelper()->getEnabled()) :?>
+<?php if ($coupon && $block->getHelper()->getMsg()) :?>
+<div id="popup-modal" >
+    <?php if ($coupon == 1) :?>
+        <?php if (trim($block->getHelper()->getSuccessDescription())) :?>
+            <div class="succ-desc">
+                <?php /* @noEscape */ echo $block->getContents($block->getHelper()->getSuccessDescription());?>
+            </div>
+        <?php endif;?>
+
+    <?php else :?>
+        <?php if (trim($block->getHelper()->getFailureDescription())) :?>
+            <div class="fail-desc">
+                <?php /* @noEscape */ echo $block->getContents($block->getHelper()->getFailureDescription());?>
+            </div>
+        <?php endif;?>
+
+    <?php endif;?>
+    <?php $block->getRemovePopup();?>
+</div>
+        <style type="text/css">
+            #popup-modal{display: none}
+            .fail-desc,.succ-desc
+            {
+                vertical-align:middle;
+                text-align:center;
+                margin: 0 auto;
+            }
+            .modal-popup.share-box .modal-content{
+                padding-bottom: 1rem;
+            }
+        </style>
+<script type="text/javascript">
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: false,
+                innerScroll: true,
+                modalClass: 'share-box',
+                buttons: []
+            };
+            var popup = modal(options, $('#popup-modal'));
+                $("#popup-modal").modal("openModal");
+                $(".modal-footer").hide();
+        }
+    );
+</script>
+<?php endif;?>
+<?php endif;?>

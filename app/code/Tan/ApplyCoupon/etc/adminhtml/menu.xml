@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Tan_ApplyCoupon::coupon"
+             title="Tan Coupons"
+             module="Tan_ApplyCoupon"
+             sortOrder="51"
+             resource="Tan_ApplyCoupon::coupon"/>
+
+        <add id="Tan_ApplyCoupon::coupon_link"
+             title="Manage Coupon Code Links"
+             module="Tan_ApplyCoupon"
+             sortOrder="10" action="applycoupon/index/"
+             resource="Tan_ApplyCoupon::coupon_link"
+             parent="Tan_ApplyCoupon::coupon"/>
+
+        <add id="Tan_ApplyCoupon::apply_coupon_configuration"
+             title="Configuration" module="Tan_ApplyCoupon"
+             sortOrder="99"
+             parent="Tan_ApplyCoupon::coupon"
+             action="adminhtml/system_config/edit/section/applycouponlink"
+             resource="Tan_ApplyCoupon::apply_coupon_configuration"/>
+    </menu>
+</config>

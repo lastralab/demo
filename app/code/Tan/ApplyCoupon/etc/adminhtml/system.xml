@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="applycouponlink" translate="label" type="text" sortOrder="330" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Coupon Code Link</label>
+            <tab>tanismo</tab>
+            <resource>Tan_ApplyCoupon::configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="101" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration</label>
+                <field id="enabled" translate="label comment" sortOrder="102" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Coupon Code Link</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="addmsg" translate="label comment" sortOrder="103" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Show Coupon Code Success & Error Message]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="successDescription" translate="label comment" sortOrder="105" type="editor" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Coupon Code Success Message</label>
+                    <frontend_model>Tan\ApplyCoupon\Block\Adminhtml\Editor</frontend_model>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="addmsg">1</field>
+                    </depends>
+                </field>
+
+                <field id="failDescription" translate="label comment" sortOrder="107" type="editor" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Coupon Code Error Message</label>
+                    <frontend_model>Tan\ApplyCoupon\Block\Adminhtml\Editor</frontend_model>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="addmsg">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="notification" translate="label" type="text" sortOrder="106" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Coupon Code Link Email Settings</label>
+                <field id="identity" translate="label comment" sortOrder="108" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="applycouponlink/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="templates" translate="label comment" sortOrder="109" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <depends>
+                    <field id="applycouponlink/general/enabled">1</field>
+                </depends>
+            </group>
+        </section>
+    </system>
+</config>

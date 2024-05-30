@@ -1,0 +1,11 @@
+
+.modal-popup.share-box  .modal-footer {
+    text-align: center
+}
+
+.data-grid-cell-content {
+    min-width: 50px;
+    max-width: 150px;
+    width: auto;
+    overflow: auto;
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <applycouponlink>
+            <general>
+                <enabled>0</enabled>
+                <addmsg>1</addmsg>
+                <successDescription><![CDATA[The weather might be bad in your area so we give you 20% discount if you place an order in the next hour. Enjoy!]]></successDescription>
+                <failDescription><![CDATA[Oh no! The weather might have changed, try again in the next hour or contact the store.]]></failDescription>
+            </general>
+            <notification>
+                <identity>general</identity>
+                <templates>applycouponlink_notification_templates</templates>
+            </notification>
+        </applycouponlink>
+    </default>
+</config>

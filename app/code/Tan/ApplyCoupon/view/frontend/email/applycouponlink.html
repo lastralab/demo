@@ -1,0 +1,11 @@
+<!--@subject {{trans "Your Coupon Code Link from %store_name" store_name=$store.getFrontendName()}} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p>{{var comment}}</p>
+
+<p>{{trans "Use following code: "}}<span><b>{{var couponCode}}</b></span></p>
+<br>
+<a href="{{var couponLink}}"><span style="padding: 10px;background: #0a6c9f;color:#ffffff">{{trans "Apply Coupon"}}</span></a>
+
+{{template config_path="design/email/footer_template"}}

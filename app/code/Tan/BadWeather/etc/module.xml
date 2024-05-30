@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Tan_BadWeather">
+        <sequence>
+            <module name="Magento_SalesRule"/>
+            <module name="Magento_Cron"/>
+            <module name="Magento_MessageQueue"/>
+            <module name="Tan_ApplyCoupon"/>
+        </sequence>
+    </module>
+</config>

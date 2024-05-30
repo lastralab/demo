@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="coupon_record_grid_list_data_source" xsi:type="string">Tan\ApplyCoupon\Model\ResourceModel\ApplyCoupon\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Tan\ApplyCoupon\Model\ResourceModel\ApplyCoupon\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">tan_apply_coupon</argument>
+            <argument name="eventPrefix" xsi:type="string">tan_apply_coupon_collection</argument>
+            <argument name="eventObject" xsi:type="string">tan_apply_coupon_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Tan\ApplyCoupon\Model\ResourceModel\ApplyCoupon
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\SalesRule\Controller\Adminhtml\Promo\Quote\Delete">
+        <plugin name="remove_link_coupon" type="Tan\ApplyCoupon\Plugin\DeleteCoupon" sortOrder="1"/>
+    </type>
+</config>
