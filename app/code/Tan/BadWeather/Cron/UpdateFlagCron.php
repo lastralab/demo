@@ -44,10 +44,9 @@ class UpdateFlagCron
         $loggedIn = $this->customerCollection->getItems();
         foreach ($loggedIn as $customer) {
             /** @var Customer $customer */
-            // TODO verify
-            $ip = $this->weatherFlags->getCustomerIp($customer->getId());
+            $ip = $this->weatherFlags->getCustomerIp($customer->getDataByKey('customer_id'));
             $celsius = $this->weatherIntegration->getCurrentTemperature($ip);
-            $this->weatherFlags->setTemperature($customer->getId(), $celsius);
+            $this->weatherFlags->setTemperature($customer->getDataByKey('customer_id'), $celsius);
         }
     }
 }
