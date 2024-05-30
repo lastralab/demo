@@ -4,7 +4,7 @@
     <consumer name="updatecustomer.temperature"
               queue="updatecustomer.temperature"
               connection="db"
-              maxMessages="5000"
+              maxMessages="2000"
               consumerInstance="Magento\Framework\MessageQueue\Consumer"
               handler="Tan\BadWeather\Model\Queue\Consumer::process"/>
 </config>
