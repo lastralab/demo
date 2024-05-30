@@ -17,7 +17,7 @@ __Tan_InitCatalog (pending)__
 
 __User Journeys__
 * Frontend:
-  
+
 https://github.com/lastralab/demo/assets/22894897/499b1ffe-1e9b-4ab1-9d5c-2322d4411fd9
 
 * Backend:
@@ -39,8 +39,8 @@ __Tan_Checkout__
 
 __Tan_Cms__
 * Experiment with Vue.js
-     * Logs message on all pages
-     * Replaces weather message placeholder with temperature data and config values from the backend
+    * Logs message on all pages
+    * Replaces weather message placeholder with temperature data and config values from the backend
 * Adds lazy loading effect to all images
 
 __Tan_Customer__
