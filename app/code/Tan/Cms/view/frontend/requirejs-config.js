@@ -1,7 +1,8 @@
 var config = {
     map: {
         '*': {
-            fadeInElement: 'Tan_Cms/js/fade-in-element'
+            fadeInElement: 'Tan_Cms/js/fade-in-element',
+            slideShow: 'Tan_Cms/js/slide-show'
         }
     },
     paths: {

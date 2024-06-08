@@ -1,0 +1,24 @@
+<?php
+/** @var \Tan\Cms\Block\Widget\SlideShow $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$images = [
+    $block->getUrl($escaper->escapeHtml($block->getData('img1'))),
+    $block->getUrl($escaper->escapeHtml($block->getData('img2'))),
+    $block->getUrl($escaper->escapeHtml($block->getData('img3')))
+];
+?>
+<div id="slide-show">
+    <br /><br />
+    <img :src="images[currentNumber]" class="widget-img" alt="Slide Show Image"/>
+    <br /><br />
+</div>
+<script type="text/x-magento-init">
+    {
+        "#slide-show": {
+            "Tan_Cms/js/slide-show": {
+                "imagesURLs": "<?= implode(",", $images) ?>"
+            }
+        }
+    }
+</script>

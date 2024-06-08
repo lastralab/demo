@@ -60,10 +60,10 @@ class WeatherFlags
     /**
      * Set Configuration Value
      * @param mixed $customerId
-     * @param float $temperature
+     * @param mixed $temperature
      * @return void
      */
-    public function setTemperature(mixed $customerId, float $temperature):void
+    public function setTemperature(mixed $customerId, mixed $temperature):void
     {
         if ($temperature !== null) {
             $flagCode = $customerId . self::FLAG_CODE_TEMPERATURE;

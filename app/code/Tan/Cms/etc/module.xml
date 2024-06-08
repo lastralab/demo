@@ -4,6 +4,7 @@
         <sequence>
             <module name="Tan_Backend"/>
             <module name="Magento_Cms"/>
+            <module name="Magento_Widget" />
         </sequence>
     </module>
 </config>

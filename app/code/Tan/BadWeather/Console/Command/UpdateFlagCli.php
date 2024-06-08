@@ -67,11 +67,11 @@ class UpdateFlagCli extends Command
                     $degrees = $this->weatherIntegration->getCurrentTemperature($ip);
                     $this->weatherFlags->setTemperature(
                         $customer->getDataByKey('customer_id'),
-                        (float)$degrees
+                        $degrees
                     );
                     $output->writeln(sprintf(
                         '<info>%s</info>',
-                        'Updated temperature: ' . $degrees . '. id: ' . $customer->getDataByKey('customer_id')
+                        'Updated temperature: ' . $degrees . ' for Customer ID: ' . $customer->getDataByKey('customer_id')
                     ));
                 } else {
                     $output->writeln(sprintf(
@@ -87,7 +87,7 @@ class UpdateFlagCli extends Command
                 $exitCode = 1;
             }
         }
-        $output->writeln("Weather Flags updated.");
+        $output->writeln("Temperature Flag updated for online customers.");
         return $exitCode;
     }
 }
