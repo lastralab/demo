@@ -2,6 +2,8 @@ define(['jquery'], function ($) {
     'use strict'
 
     return function (element, duration) {
-        $(element).hide().fadeIn(duration || 2000)
+        if (!$(element).hasClass('widget-img')) {
+            $(element).hide().fadeIn(duration || 2000)
+        }
     }
 })

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Tan\Cms\Block\Widget\SlideShow" id="slide_show_widget">
+        <label>Slide Show Widget</label>
+        <description>Add images to display in a slide show (3)</description>
+        <parameters>
+            <parameter name="img1" xsi:type="text" visible="true" required="true" sort_order="10">
+                <label translate="true">Image 1 URL</label>
+            </parameter>
+            <parameter name="img2" xsi:type="text" visible="true" required="true" sort_order="20">
+                <label translate="true">Image 2 URL</label>
+            </parameter>
+            <parameter name="img3" xsi:type="text" visible="true" required="true" sort_order="30">
+                <label translate="true">Image 3 URL</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>
