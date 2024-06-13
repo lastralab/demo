@@ -1,0 +1,19 @@
+{
+    "name": "tan/module-tagline",
+    "description": "Magento 2 Module to display a tag line under the product name.",
+    "require": {
+        "php": "~7.3.0 || ~7.4.0 || ~8.0.0",
+        "magento/framework": "101.0.*"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Tan\\TagLine\\": ""
+        }
+    }
+}
+

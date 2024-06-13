@@ -1,0 +1,7 @@
+<?php /** @var \Magento\Catalog\Block\Product\View $block */ ?>
+<?php $_product = $block->getProduct(); ?>
+<?php if ($tag = $_product->getData('tag_line')): ?>
+    <div class="tag-line">
+        <span><?php echo $block->escapeHtml($tag); ?></span>
+    </div>
+<?php endif; ?>
