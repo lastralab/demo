@@ -42,7 +42,7 @@ __Tan_Cms__
     * Logs message on all pages
     * Replaces weather message placeholder with temperature data and config values from the backend
 * Adds lazy loading effect to all images
-* Created a widget to display 3 images in a slideshow
+* Created a widget to display 3 images in a slideshow [#85](https://github.com/lastralab/demo/issues/85)
 ![widget](https://github.com/lastralab/demo/assets/22894897/f077fd39-5b64-4526-8ea0-ee2a06d2400f)
 
 
