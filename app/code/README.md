@@ -42,8 +42,7 @@ __Tan_Cms__
     * Logs message on all pages
     * Replaces weather message placeholder with temperature data and config values from the backend
 * Adds lazy loading effect to all images
-* Created a widget to display 3 images in a slideshow [#85](https://github.com/lastralab/demo/issues/85)
-![widget](https://github.com/lastralab/demo/assets/22894897/f077fd39-5b64-4526-8ea0-ee2a06d2400f)
+* Created a widget to display 3 images in a slideshow [TAN-0085](https://github.com/lastralab/demo/issues/85)
 
 
 __Tan_Customer__
@@ -60,6 +59,9 @@ __Tan_Review__
 __Tan_Sales__
 * Removes action column for recent orders
 * Order can be viewed by clicking on its order ID number
+
+__Tan_TagLine__
+* Adds subtitle to product name in product page [TAN-0089](https://github.com/lastralab/demo/issues/89)
 
 __Tan_Theme__
 * Adds compare items link to the top links section
