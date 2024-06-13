@@ -1,0 +1,24 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    * {
+        .tag-line {
+            z-index: 9 !important;
+            position: relative;
+            top: -3rem;
+            span {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    * {
+        .tag-line {
+            top: -1.5rem;
+        }
+    }
+}
