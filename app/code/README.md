@@ -41,8 +41,8 @@ __Tan_Cms__
 * Experimenting with Vue.js
     * Log message on all pages
     * Replace weather message placeholder with temperature data and config values from the backend
-* Adds lazy loading effect to all images
-* Creates a widget to display 3 images in a slideshow [TAN-0085](https://github.com/lastralab/demo/issues/85)
+    * Adds lazy loading effect to all images
+    * Creates a widget to display 3 images in a slideshow [TAN-0085](https://github.com/lastralab/demo/issues/85)
 * Apply coupon code when weather is "bad" [TAN-0084](https://github.com/lastralab/demo/issues/84)
 
 
